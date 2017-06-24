@@ -29,7 +29,7 @@ new Vue({
   methods: {
     listModules: function () {
       var app = this
-      axios.get("http://127.0.0.1/list.php")
+      axios.get("/list.php")
         .then(function(response) {
           app.moduler = response.data
         })
