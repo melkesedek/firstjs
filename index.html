@@ -8,7 +8,11 @@
 <body>
   <div id="app">
     <el-button @click="listModules" type="primary">Hämta moduler</el-button>
-    <span>{{status}}</span>
+    <el-table :data="moduler" style="width: 100%">
+      <el-table-column prop="id" label="Number" width="180"></el-table-column>
+      <el-table-column prop="module" label="Modul" width="180"></el-table-column>
+      <el-table-column prop="supplier" label="Leverantör" width="180"></el-table-column>
+    </el-table>
   </div>
 </body>
 <!-- import Vue before Element -->
@@ -20,17 +24,17 @@
 new Vue({
   el: '#app',
   data: {
-    status: 'Börja'
+    moduler: [{"id":"","module":"","supplier":""}]
   },
   methods: {
     listModules: function () {
       var app = this
       axios.get("http://127.0.0.1/list.php")
         .then(function(response) {
-          app.status = response.data
+          app.moduler = response.data
         })
         .catch(function(error) {
-          app.status = "Error"
+          app.moduler = [{"id":"666","module":"Error","supplier":"Error"}]
         })
     }
   }
